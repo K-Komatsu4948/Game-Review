@@ -11,14 +11,18 @@
             <ul class="navbar-nav mr-auto"></ul>
             <ul class="navbar-nav">
                 @if (Auth::check())
-                    {{-- ユーザ一覧ページへのリンク --}}
-                    <li class="nav-item"><a href="#" class="nav-link">Users</a></li>
+                    {{-- ゲーム登録へのリンク --}}
+                    <li class="nav-item">{!! link_to_route('users.index', 'ゲーム登録', [], ['class' => 'nav-link']) !!}</li>
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->name }}</a>
+                    {{-- ゲーム検索へのリンク --}}
+                    <li class="nav-item"><a href="#" class="nav-link">ゲーム検索</a></li>
                     <li class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->name }}</a>
                         <ul class="dropdown-menu dropdown-menu-right">
-                            {{-- マイレビュー一覧ページへのリンク --}}
-                            <li class="dropdown-item"><a href="#">マイレビュー一覧</a></li>
-                            <li class="dropdown-divider"></li>
+                            {{-- マイレビュ一覧ページへのリンク --}}
+                                <li class="dropdown-item">{!! link_to_route('users.show', 'Myreviews', ['user' => Auth::id()]) !!}</li>
+                                <li class="dropdown-divider"></li>
                             {{-- ログアウトへのリンク --}}
                             <li class="dropdown-item">{!! link_to_route('logout.get', 'Logout') !!}</li>
                         </ul>
