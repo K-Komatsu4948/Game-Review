@@ -1,7 +1,7 @@
 <header class="mb-4">
     <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
         {{-- トップページへのリンク --}}
-        <a class="navbar-brand" href="/">Microposts</a>
+        <a class="navbar-brand" href="/">Game Reviews</a>
         
         <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#nav-bar">
             <span class="navbar-toggler-icon"></span>
@@ -11,16 +11,20 @@
             <ul class="navbar-nav mr-auto"></ul>
             <ul class="navbar-nav">
                 @if (Auth::check())
-                    {{-- ユーザ一覧ページへのリンク --}}
-                    <li class="nav-item">{!! link_to_route('users.index', 'Users', [], ['class' => 'nav-link']) !!}</li>
                     <li class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->name }}</a>
                         <ul class="dropdown-menu dropdown-menu-right">
-                            {{-- ユーザ詳細ページへのリンク --}}
-                                <li class="dropdown-item">{!! link_to_route('users.show', 'My profile', ['user' => Auth::id()]) !!}</li>
-                                <li class="dropdown-divider"></li>
-                                {{-- ログアウトへのリンク --}}
-                                <li class="dropdown-item">{!! link_to_route('logout.get', 'Logout') !!}</li>
+                            {{-- ゲーム登録へのリンク --}}
+                            <li class="dropdown-item">{!! link_to_route('users.show', 'ゲーム登録', ['user' => Auth::id()]) !!}</li>
+                            <li class="dropdown-divider"></li>
+                            {{-- ゲーム検索へのリンク --}}
+                            <li class="dropdown-item">{!! link_to_route('users.show', 'ゲーム検索', ['user' => Auth::id()]) !!}</li>
+                            <li class="dropdown-divider"></li>
+                            {{-- マイレビュー一覧へのリンク --}}
+                            <li class="dropdown-item">{!! link_to_route('users.show', 'マイレビュー一覧', ['user' => Auth::id()]) !!}</li>
+                            <li class="dropdown-divider"></li>
+                            {{-- ログアウトへのリンク --}}
+                            <li class="dropdown-item">{!! link_to_route('logout.get', 'Logout') !!}</li>
                         </ul>
                     </li>
                 @else
