@@ -4,21 +4,18 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\User;
+use App\Game;
 
-class UsersController extends Controller
+
+class GameregistersController extends Controller
 {
     public function index()
     {
-        // ユーザ一覧をidの降順で取得
-        $users = User::orderBy('id', 'desc')->paginate(10);
+        $games = Game::all();
         
-        
-        // ユーザ一覧ビューでそれを表示
-        return view('welcome', [
-            'users' => $users,
+        return view('gameregisters.index', [
+            'games' => $games,
         ]);
-        
     }
 
     /**
@@ -28,7 +25,7 @@ class UsersController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
@@ -38,8 +35,20 @@ class UsersController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //
+    {   
+        $request->validate([
+            'content' => 'required|max:255',
+        ]);
+        
+        $game = new Game;
+        $game->user_id = $request->user()->id;
+        $game->name = $request->name;
+        $game->content = $request->content;
+        $game->save();
+        
+        
+        
+        return redirect('/');
     }
 
     /**
@@ -48,26 +57,8 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        
-        $user = User::findOrFail($id);
-        
-        
-        $user->loadRelationshipCounts();
-        
-        
-        $games = $user->games()->orderBy('created_at', 'desc')->paginate(100);
-        
-        $reviews = $user->reviews()->orderBy('created_at', 'desc')->paginate(100);
-        
-        
-        return view('users.show', [
-            'user' => $user,
-            'games' => $games,
-            'reviews'=>$reviews
-        ]);
-    }
+    public function show()
+    {}
 
     /**
      * Show the form for editing the specified resource.
@@ -100,16 +91,6 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
-       $game = \App\Game::findOrFail($id);
-
-        // 認証済みユーザ（閲覧者）がその投稿の所有者である場合は、投稿を削除
-        if (\Auth::id() === $game->user_id) {
-            $game->delete();
-        }
-
-        // 前のURLへリダイレクトさせる
-        return back();
+       //
     }
-
-    
 }

@@ -4,19 +4,19 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Game extends Model
+class Review extends Model
 {
     protected $fillable = [
-     'name', 'content', 
+     'score', 'review', 
     ];
-    
     public function user()
     {
         return $this->belongsTo(User::class);
     }
     
-    public function reviews()
+    public function game()
     {
-        return $this->hasMany(Review::class);
+        return $this->belongsTo(Game::class);
     }
+
 }

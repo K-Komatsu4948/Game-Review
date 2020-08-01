@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 
     ];
 
     /**
@@ -37,6 +37,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
     
+    
     public function games()
     {
         return $this->hasMany(Game::class);
@@ -44,6 +45,40 @@ class User extends Authenticatable
     
     public function loadRelationshipCounts()
     {
-        $this->loadCount('games');
+        $this->loadCount('games', 'reviews');
+    }
+    
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
+    }
+    
+    public function feed_reviews()
+    {
+        
+        $userIds = $this->id;
+        
+        return REview::whereIn('user_id', $userIds);
+    }
+    
+    public function game_register() 
+    {
+       
+       $user = User::findOrFail($id);
+       
+       
+       
+       return view('games.game_register', [
+            'user' => $user,
+        ]);
+    }
+    
+     public function game_search() 
+    {
+        $data = null;
+        
+        return view('games.search', [
+        'game' => $game,
+        ]);
     }
 }

@@ -15,13 +15,16 @@
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->name }}</a>
                         <ul class="dropdown-menu dropdown-menu-right">
                             {{-- ゲーム登録へのリンク --}}
-                            <li class="dropdown-item">{!! link_to_route('users.show', 'ゲーム登録', ['user' => Auth::id()]) !!}</li>
+                            <li class="dropdown-item">{!! link_to_route('gameregister.get', 'ゲーム登録', ['user' => Auth::id()]) !!}</li>
                             <li class="dropdown-divider"></li>
                             {{-- ゲーム検索へのリンク --}}
-                            <li class="dropdown-item">{!! link_to_route('users.show', 'ゲーム検索', ['user' => Auth::id()]) !!}</li>
+                            <li class="dropdown-item">{!! link_to_route('search.get', 'ゲーム検索', ['user' => Auth::id()]) !!}</li>
                             <li class="dropdown-divider"></li>
                             {{-- マイレビュー一覧へのリンク --}}
-                            <li class="dropdown-item">{!! link_to_route('users.show', 'マイレビュー一覧', ['user' => Auth::id()]) !!}</li>
+                            <li class="dropdown-item">{!! link_to_route('reviews.get', 'マイレビュー一覧', ['user' => Auth::id()]) !!}</li>
+                            <li class="dropdown-divider"></li>
+                            {{--　レビュー一覧へのリンク --}}
+                            <li class="dropdown-item">{!! link_to_route('reviews.index', 'レビュー一覧', ['user' => Auth::id()]) !!}</li>
                             <li class="dropdown-divider"></li>
                             {{-- ログアウトへのリンク --}}
                             <li class="dropdown-item">{!! link_to_route('logout.get', 'Logout') !!}</li>

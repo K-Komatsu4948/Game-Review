@@ -4,21 +4,32 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\User;
+use App\Game;
 
-class UsersController extends Controller
+class GamesearchsController extends Controller
 {
-    public function index()
+    public function index(Request $request )
     {
-        // ユーザ一覧をidの降順で取得
-        $users = User::orderBy('id', 'desc')->paginate(10);
         
+      $query = Game::query();
+      
+      
+        $search1 = $request->input('name');
         
-        // ユーザ一覧ビューでそれを表示
-        return view('welcome', [
-            'users' => $users,
+        if ($request->has('name')) {
+            $query->where('name', 'like', '%' . $search1 . '%');
+        }
+        $search2 = $request->input('score');
+        
+        if ($request->has('score')) {
+            $query->where('score', 'like', '%' . $search2 . '%');
+        }
+        
+        $data = $query->paginate(10);
+        
+        return view('games.search', [
+            'data' => $data
         ]);
-        
     }
 
     /**
@@ -50,23 +61,7 @@ class UsersController extends Controller
      */
     public function show($id)
     {
-        
-        $user = User::findOrFail($id);
-        
-        
-        $user->loadRelationshipCounts();
-        
-        
-        $games = $user->games()->orderBy('created_at', 'desc')->paginate(100);
-        
-        $reviews = $user->reviews()->orderBy('created_at', 'desc')->paginate(100);
-        
-        
-        return view('users.show', [
-            'user' => $user,
-            'games' => $games,
-            'reviews'=>$reviews
-        ]);
+        //
     }
 
     /**
@@ -100,16 +95,8 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
-       $game = \App\Game::findOrFail($id);
-
-        // 認証済みユーザ（閲覧者）がその投稿の所有者である場合は、投稿を削除
-        if (\Auth::id() === $game->user_id) {
-            $game->delete();
-        }
-
-        // 前のURLへリダイレクトさせる
-        return back();
+       //
     }
-
+    
     
 }
