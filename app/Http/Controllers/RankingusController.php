@@ -8,6 +8,9 @@ class RankingusController extends Controller
 {
     public function index()
     {
+        $reviews = Review::all();
+    
+        $data = [];
         if (\Auth::check()) {
             
             $user = \Auth::user();
@@ -18,8 +21,9 @@ class RankingusController extends Controller
              
             $yearly = $user->reviews()->orderBy('created_at', 'desc')->paginate(10);
             
-        $data = [ 'weekly' => $weekly, 'monthly' => $monthly,  'yearly' => $yearly];
+            $data = [ 'weekly' => $weekly, 'monthly' => $monthly,  'yearly' => $yearly];
         }
+        
         
          return view('games.rankingu', $data);
     }

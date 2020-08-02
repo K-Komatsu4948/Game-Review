@@ -7,8 +7,9 @@
 {!! Form::open(['action' => 'ReviewsController@store', 'method' => 'post']) !!}
     {{ csrf_field() }}
     <div>
+        {{Form::hidden('game_id', 'required', ['id' => 'game_id'])}}
         <label>ゲーム名</label><br>
-        <input type="text" name="name">
+        <input type="text" name="name" >
     </div>
     <div>
         <label>レビュー</label></label><br>

@@ -7,13 +7,13 @@ use Illuminate\Http\Request;
 use App\Game;
 
 
-
 class GamesController extends Controller
 {
     public function index()
     {   
         $games = Game::all();
         
+         $data = [];
         if (\Auth::check()) {
             
             $user = \Auth::user();
@@ -24,7 +24,7 @@ class GamesController extends Controller
              
             $yearly = $user->reviews()->orderBy('created_at', 'desc')->paginate(10);
             
-        $data = [ 'weekly' => $weekly, 'monthly' => $monthly,  'yearly' => $yearly];
+            $data = [ 'weekly' => $weekly, 'monthly' => $monthly,  'yearly' => $yearly];
         }
         
          return view('welcome', $data);

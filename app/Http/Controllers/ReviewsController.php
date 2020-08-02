@@ -17,17 +17,21 @@ class ReviewsController extends Controller
                 'user' => $user,
                 'reviews' => $reviews,
                 'games' => $games,
+                
             ];
         }
-        return view('users.show');
+        return view('users.show', $data);
     }
     public function store(Request $request)
-    {
+    {   
         $request->validate([
-            'score' => 'required|max:255',
+            'score' => 'required',
+            'game_id' =>'required'
         ]);
+        
         $request->user()->reviews()->create([
             'score' => $request->score,
+            'game_id' => $request->game_id,
         ]);
         return back();
     }
