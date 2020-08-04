@@ -4,10 +4,17 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\User;
+
+use App\Game;
+
+use App\Review;
+
 class ReviewsController extends Controller
 {
     public function index()
     {
+        $reviews = Review::all();
         $data = [];
         if (\Auth::check()) { 
             $user = \Auth::user();
@@ -22,17 +29,31 @@ class ReviewsController extends Controller
         }
         return view('users.show', $data);
     }
+    
+    
+    public function create($id)
+    {
+        $review = new Review;
+        
+        $game = Game::findOrFail($id);
+        
+        return view('reviews.score', [
+            'review' => $review,
+            'game' => $game,
+        ]);
+    }
+    
     public function store(Request $request)
     {   
         $request->validate([
-            'score' => 'required',
-            'game_id' =>'required'
+            'score' => 'required|max:255',
         ]);
         
-        $request->user()->reviews()->create([
-            'score' => $request->score,
-            'game_id' => $request->game_id,
-        ]);
+        $review = new Review;
+        $review->score = $request->score;
+        $review->game_id = $request->game_id;
+        $review->save();
+        
         return back();
     }
     public function destroy($id)
@@ -42,35 +63,5 @@ class ReviewsController extends Controller
             $review->delete();
         }
         return back();
-    }
-    public function weekly_rankingus($id)
-    {
-        $review = Review::findOrFail($id);
-        $review->loadRelationshipCounts();
-        $weekly_rankingus = $review->weekly_rankingus()->paginate(100);
-        return view('games.rankingu', [
-            'user' => $user,
-            'review' => $review,
-        ]);
-    }
-    public function monthly_rankingus($id)
-    {
-        $review = Review::findOrFail($id);
-        $review->loadRelationshipCounts();
-        $monthly_rankingus = $review->monthly_rankingus()->paginate(100);
-        return view('games.rankingu', [
-            'user' => $user,
-            'review' => $review,
-        ]);
-    }
-    public function yearly_rankingus($id)
-    {
-        $review = Review::findOrFail($id);
-        $review->loadRelationshipCounts();
-        $yearly_rankingus = $review->yearly_rankingus()->paginate(100);
-        return view('games.rankingu', [
-            'user' => $user,
-            'review' => $review,
-        ]);
     }
 }

@@ -73,12 +73,39 @@ class User extends Authenticatable
         ]);
     }
     
-     public function game_search() 
+    public function game_search() 
     {
         $data = null;
         
         return view('games.search', [
         'game' => $game,
+        ]);
+    }
+    
+    public function weekly() 
+    {
+        $review = \App\Review::findOrFail($id);
+        
+        return view('games.rankingu', [
+        'reviews' => $review,
+        ]);
+    }
+    
+    public function monthly() 
+    {
+        $review = \App\Review::findOrFail($id);
+        
+        return view('games.rankingu', [
+        'reviews' => $reviews,
+        ]);
+    }
+    
+    public function yearly() 
+    {
+        $review = \App\Review::findOrFail($id);
+        
+        return view('games.rankingu', [
+        'reviews' => $review,
         ]);
     }
 }

@@ -16,12 +16,12 @@
                 @if(!empty($data))
                     <div class="my-2 p-0">
                         @foreach($data as $game)
-                            <div class="row py-2 border-bottom text-left">
+                            <div class="row py-2 border-bottom tefxt-left">
                                 <thead>
                                     <tr>
                                         <th class="w-50">{{ $game->name }}</th>
                                         <th class="w-30">{{ $game->score }}</th>
-                                        <th class="w-20">{!! link_to_route('score.post', '投稿', ['review_id' => $game->id]) !!}</th>
+                                        <th class="w-20">{!! link_to_route('reviews.create', '投稿', ['game' => $game->id]) !!}</th>
                                     </tr>
                                 </thead>
                             </div>

@@ -26,9 +26,9 @@ Route::get('logout', 'Auth\LoginController@logout')->name('logout.get');
 
 Route::group(['middleware' => ['auth']], function () {
     Route::group(['prefix' => 'rankingus/{id}'], function () {
-        Route::post('weekly', 'RankingusController@index')->name('weekly_rankingus');
-        Route::post('monthly', 'RankingusController@index')->name('monthly_rankingus');
-        Route::post('yearly', 'RankingusController@index')->name('yearly_rankingus');
+        Route::get('weekly', 'RankingusController@weekly')->name('weekly_rankingus');
+        Route::get('monthly', 'RankingusController@monthly')->name('monthly_rankingus');
+        Route::get('yearly', 'RankingusController@yearly')->name('yearly_rankingus');
     });
     Route::resource('users', 'UsersController', ['only' => ['index', 'show']]);
     
@@ -44,8 +44,11 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('myreviews/{user}', 'MyreviewsController@index')->name('reviews.get');
     
-    Route::get('reviews/score', 'ReviewScoresController@show')->name('score.get');
-    Route::post('reviews/score', 'ReviewScoresController@create')->name('score.post');
+    Route::get('games/{game}', 'ReviewsController@create')->name('reviews.create');
     
-    Route::get('rankingus', 'RankingusController@index')->name('rankingu.get');
+    Route::get('rankingus', 'RankingusController@weekly')->name('rankingu.get');
+    
+    Route::get('rankingus/month', 'MonthlyrankingusController@monthly')->name('monthly.get');
+    
+    Route::get('rankingus/year', 'YearlyrankingusController@yearly')->name('yearly.get');
 });

@@ -14,14 +14,7 @@ class ReviewScoresController extends Controller
 {   
     public function show()
     {
-        $review = new Review;
-        
-        
-        return view('reviews.score', [
-            'review' => $review,
-            
-            
-        ]);
+       //
     }
     
     public function create(Request $request)

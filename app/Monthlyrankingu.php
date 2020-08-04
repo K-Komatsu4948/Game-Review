@@ -4,19 +4,14 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Review extends Model
+class Monthlyrankingu extends Model
 {
     protected $fillable = [
-     'score', 'content', 'game_id',
+     'score', 'game_id','content',
     ];
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
     
     public function game()
     {
         return $this->belongsTo(Game::class);
     }
-
 }

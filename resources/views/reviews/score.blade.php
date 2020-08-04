@@ -1,13 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
+
     <h1>レビュー投稿</h1>
-
-
-{!! Form::open(['action' => 'ReviewsController@store', 'method' => 'post']) !!}
+{!! Form::open(['route' => 'reviews.store', 'method' => 'get', ]) !!}
     {{ csrf_field() }}
     <div>
-        {{Form::hidden('game_id', 'required', ['id' => 'game_id'])}}
+        {{Form::hidden('game_id', $game->id, ['id' => 'game_id']) }}
         <label>ゲーム名</label><br>
         <input type="text" name="name" >
     </div>

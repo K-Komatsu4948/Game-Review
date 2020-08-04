@@ -4,27 +4,32 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\User;
+
+use App\Game;
+
+use App\Review;
+
+use App\Weeklyrankingu;
+
+use App\Monthlyranking;
+
+use App\Yearlyranking;
+
 class RankingusController extends Controller
 {
-    public function index()
+    public function weekly()
     {
-        $reviews = Review::all();
-    
+        
         $data = [];
         if (\Auth::check()) {
             
-            $user = \Auth::user();
+            $weeklyrankings = Weeklyrankingu::take(5)->latest()->get();
             
-            $weekly = $user->reviews()->orderBy('created_at', 'desc')->paginate(10);
-            
-            $monthly = $user->reviews()->orderBy('created_at', 'desc')->paginate(10);
-             
-            $yearly = $user->reviews()->orderBy('created_at', 'desc')->paginate(10);
-            
-            $data = [ 'weekly' => $weekly, 'monthly' => $monthly,  'yearly' => $yearly];
+            $data = [ 'weekly' => $weeklyrankings];
         }
         
         
-         return view('games.rankingu', $data);
+         return view('welcome', $data);
     }
 }
