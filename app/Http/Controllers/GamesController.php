@@ -6,30 +6,29 @@ use Illuminate\Http\Request;
 
 use App\Game;
 
+use App\WeeklyRankingu;
+
+use App\MonthlyRankingu;
+
+use App\YearlyRankingu;
+
 
 class GamesController extends Controller
 {
     public function index()
-    {   
-        $games = Game::all();
-        
-         $data = [];
+    {
         if (\Auth::check()) {
             
             $user = \Auth::user();
             
-            $weekly = $user->reviews()->orderBy('created_at', 'desc')->paginate(10);
+            $weeklyrankingus = WeeklyRankingu::take(5)->latest()->get();
             
-            $monthly = $user->reviews()->orderBy('created_at', 'desc')->paginate(10);
-             
-            $yearly = $user->reviews()->orderBy('created_at', 'desc')->paginate(10);
-            
-            $data = [ 'weekly' => $weekly, 'monthly' => $monthly,  'yearly' => $yearly];
+            $data = [ 'weekly' => $weeklyrankingus];
         }
+        
         
          return view('welcome', $data);
     }
-    
     public function store(Request $request)
     {
         

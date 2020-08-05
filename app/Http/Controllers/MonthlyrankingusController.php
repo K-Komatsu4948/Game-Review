@@ -6,11 +6,11 @@ use Illuminate\Http\Request;
 
 use App\Game;
 
-use App\Weeklyrankingu;
+use App\WeeklyRankingu;
 
-use App\Monthlyranking;
+use App\MonthlyRankingu;
 
-use App\Yearlyranking;
+use App\YearlyRankingu;
 
 class MonthlyrankingusController extends Controller
 {
@@ -19,10 +19,10 @@ class MonthlyrankingusController extends Controller
         $data = [];
         if (\Auth::check()) {
             
-            $monthlyrankings = Monthlyrankingu::take(5)->latest()->get();
+            $monthlyrankingus = MonthlyRankingu::take(5)->latest()->get();
             
-            $data = [ 'monthly' => $monthlyrankings];
+            $data = [ 'monthly' => $monthlyrankingus];
         }
-         return view('games.monthly.rankingu', $data);
+         return view('games.monthly_rankingu', $data);
     }
 }

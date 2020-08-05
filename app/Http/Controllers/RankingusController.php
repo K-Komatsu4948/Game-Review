@@ -10,11 +10,11 @@ use App\Game;
 
 use App\Review;
 
-use App\Weeklyrankingu;
+use App\WeeklyRankingu;
 
-use App\Monthlyranking;
+use App\MonthlyRankingu;
 
-use App\Yearlyranking;
+use App\YearlyRankingu;
 
 class RankingusController extends Controller
 {
@@ -24,12 +24,14 @@ class RankingusController extends Controller
         $data = [];
         if (\Auth::check()) {
             
-            $weeklyrankings = Weeklyrankingu::take(5)->latest()->get();
+            $user = \Auth::user();
             
-            $data = [ 'weekly' => $weeklyrankings];
+            $weeklyrankingus = WeeklyRankingu::take(5)->latest()->get();
+            
+            $data = [ 'weekly' => $weeklyrankingus];
         }
         
         
-         return view('welcome', $data);
+         return view('games.rankingu', $data);
     }
 }

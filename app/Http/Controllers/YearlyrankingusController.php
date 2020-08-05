@@ -5,12 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Game;
+ 
+use App\WeeklyRankingu;
 
-use App\Weeklyrankingu;
+use App\MonthlyRankingu;
 
-use App\Monthlyranking;
-
-use App\Yearlyranking;
+use App\YearlyRankingu;
 
 class YearlyrankingusController extends Controller
 {
@@ -19,10 +19,10 @@ class YearlyrankingusController extends Controller
          $data = [];
         if (\Auth::check()) {
             
-            $yearlyrankings = Yearlyrankingu::take(5)->latest()->get();
+            $yearlyrankingus = YearlyRankingu::take(5)->latest()->get();
             
-            $data = [ 'yearly' => $yearlyrankings];
+            $data = [ 'yearly' => $yearlyrankingus];
         }
-        return view('games.yearly.rankingu', $data);
+        return view('games.yearly_rankingu', $data);
     }
 }

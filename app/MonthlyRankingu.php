@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Monthlyrankingu extends Model
+class MonthlyRankingu extends Model
 {
     protected $fillable = [
      'score', 'game_id','content',

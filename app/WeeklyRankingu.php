@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Yearlyrankingu extends Model
+class WeeklyRankingu extends Model
 {
     protected $fillable = [
      'score', 'game_id','content',

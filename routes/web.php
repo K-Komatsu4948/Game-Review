@@ -46,7 +46,7 @@ Route::group(['middleware' => ['auth']], function () {
     
     Route::get('games/{game}', 'ReviewsController@create')->name('reviews.create');
     
-    Route::get('rankingus', 'RankingusController@weekly')->name('rankingu.get');
+    Route::get('rankingus', 'GamesController@index')->name('rankingu.get');
     
     Route::get('rankingus/month', 'MonthlyrankingusController@monthly')->name('monthly.get');
     

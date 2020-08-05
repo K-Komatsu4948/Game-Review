@@ -34,7 +34,7 @@
                     <td>{{ $rankingu->score }}</td>
                     <td>{{ $rankingu->content }}</td>
                 </tr>
-                <tr class="table-bordered	">
+                <tr class="table-bordered">
                     <td>{{ $rankingu->game->name }}</td>
                     <td>{{ $rankingu->score }}</td>
                     <td>{{ $rankingu->content }}</td>
