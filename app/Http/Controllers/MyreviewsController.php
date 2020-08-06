@@ -8,6 +8,8 @@ use App\User;
 
 use App\Game;
 
+use App\Review;
+
 class MyreviewsController extends Controller
 {
     public function index($id)
@@ -15,26 +17,20 @@ class MyreviewsController extends Controller
         $data = [];
         if (\Auth::check()) { 
             
-            $user = User::findOrFail($id);
+            $user = \Auth::user();
             
-            $games = $user->games()->orderBy('created_at', 'desc')->paginate(10);
-            
-            $reviews = $user->reviews()->orderBy('created_at', 'desc')->paginate(100);
+            $reviews = $user->reviews()->paginate(10);
+    
             
             $data = [
                 'user' => $user,
                 'reviews' => $reviews,
-                'games' => $games,
             ];
         }
         //dd('aaa');
         
         
-        return view('reviews.review', [
-            'user' => $user,
-            'reviews'=>$reviews,
-            'games'=>$games,
-        ]);
+        return view('reviews.review', $data);
         
     }
 
@@ -49,7 +45,9 @@ class MyreviewsController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly 
+     * 
+     * d resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response

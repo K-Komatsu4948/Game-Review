@@ -3,12 +3,11 @@
 @section('content')
 
     <h1>レビュー投稿</h1>
-{!! Form::open(['route' => 'reviews.store', 'method' => 'get', ]) !!}
+{!! Form::open(['route' => 'reviews.post', 'method' => 'post', ]) !!}
     {{ csrf_field() }}
     <div>
-        {{Form::hidden('game_id', $game->id, ['id' => 'game_id']) }}
-        <label>ゲーム名</label><br>
-        <input type="text" name="name" >
+        {{ Form::label('ゲーム名') }}
+        {{ Form::text('game',  $game->name) }}
     </div>
     <div>
         <label>レビュー</label></label><br>

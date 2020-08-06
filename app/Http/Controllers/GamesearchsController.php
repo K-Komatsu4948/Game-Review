@@ -19,11 +19,6 @@ class GamesearchsController extends Controller
         if ($request->has('name')) {
             $query->where('name', 'like', '%' . $search1 . '%');
         }
-        $search2 = $request->input('score');
-        
-        if ($request->has('score')) {
-            $query->where('score', 'like', '%' . $search2 . '%');
-        }
         
         $data = $query->paginate(10);
         

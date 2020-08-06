@@ -1,33 +1,33 @@
 @extends('layouts.app')
 
 @section('content')
-   @if (count($reviews) > 0)
-    <ul class="list-unstyled">
-        @foreach ($reviews as $review)
-            <li class="media mb-3">
-                {{-- 投稿の所有者のメールアドレスをもとにGravatarを取得して表示 --}}
-                <img class="mr-2 rounded" src="{{ Gravatar::get($review->user->email, ['size' => 50]) }}" alt="">
-                <div class="media-body">
-                    <div>
-                        <span class="text-muted">posted at {{ $review->created_at }}</span>
-                    </div>
-                    <div>
-                        {{-- 投稿内容 --}}
-                        <p class="mb-0">{!! nl2br(e($review->review)) !!}</p>
-                    </div>
-                    <div>
-                        @if (Auth::id() == $review->user_id)
-                            {{-- 投稿削除ボタンのフォーム --}}
-                            {!! Form::open(['route' => ['reviews.destroy', $review->id], 'method' => 'delete']) !!}
-                                {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-sm']) !!}
-                            {!! Form::close() !!}
-                        @endif
-                    </div>
-                </div>
-            </li>
-        @endforeach
-    </ul>
-    {{-- ページネーションのリンク --}}
-    {{ $reviews->links() }}
-@endif
+<!DOCTYPE html>
+<html lang="ja">
+    <header>
+        <meta charset="utf-8">
+        <title>Game Reviews</title>
+    </header>
+    <body>
+        <h1>レビュー一覧</h1>
+        <div class="row">
+            <div class="col-sm-12">
+                <table class="table">
+                @foreach($reviews as $review)
+                <tr class="table-bordered">
+                    <td>{{ $review->game->name}}</td>
+                    <td>{{ $review->user->name }}</td>
+                    <td>{{ $review->score }}</td>
+                    <td>{{ $review->content }}</td>
+                    @foreach($games as $game)
+                    <td>{!! link_to_route('reviews.create', '投稿',  ['game' => $game->id]) !!}</td>
+                    @endforeach
+                </tr>
+                @endforeach
+                </table>
+            </div>
+        </div>
+    </body>
+</html>
+{{-- ページネーションのリンク --}}
+{{ $reviews->links() }}
 @endsection

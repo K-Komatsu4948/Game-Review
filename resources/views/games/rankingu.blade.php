@@ -10,37 +10,22 @@
     <body>
         <h1>ランキング</h1>
         <div class="row">
-            <div class="col-sm-8">
-                @foreach($weekly as $rankingu)
-                <table class="table nav nav-tabs nav-justified mb-3">
+            <div class="col-sm-10">
+                <table class="table">
                 <tr class="nav-item">
-                        <th class="text-center nav-item"><a href="{{ route('rankingu.get', ['id' => $rankingu->id]) }}" class="nav-link">週間</a></th>
-                        <th class="text-center nav-item"><a href="{{ route('monthly.get', ['id' => $rankingu->id]) }}" class="nav-link">月間</a></th>
-                        <th class="text-center nav-item"><a href="{{ route('yearly.get', ['id' => $rankingu->id]) }}" class="nav-link">年間</a></th>
+                        <th class="text-center nav-item"><a href="{{ route('rankingu.get') }}" class="nav-link">週間</a></th>
+                        <th class="text-center nav-item"><a href="{{ route('monthly.get') }}" class="nav-link">月間</a></th>
+                        <th class="text-center nav-item"><a href="{{ route('yearly.get') }}" class="nav-link">年間</a></th>
                         
                 </tr>
+                @foreach($weekly as $rankingu)
                 <tr class="table-bordered">
                     <td>{{ $rankingu->game->name }}</td>
                     <td>{{ $rankingu->score }}</td>
                     <td>{{ $rankingu->content }}</td>
                 </tr>
-                <tr class="table-bordered">
-                    <td>{{ $rankingu->game->name }}</td>
-                    <td>{{ $rankingu->score }}</td>
-                    <td>{{ $rankingu->content }}</td>
-                </tr>
-                <tr class="table-bordered">
-                    <td>{{ $rankingu->game->name }}</td>
-                    <td>{{ $rankingu->score }}</td>
-                    <td>{{ $rankingu->content }}</td>
-                </tr>
-                <tr class="table-bordered">
-                    <td>{{ $rankingu->game->name }}</td>
-                    <td>{{ $rankingu->score }}</td>
-                    <td>{{ $rankingu->content }}</td>
-                </tr>
-                </table>
                 @endforeach
+                </table>
             </div>
         </div>
     </body>

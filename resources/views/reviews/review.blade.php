@@ -1,34 +1,39 @@
 @extends('layouts.app')
 
 @section('content')
-   @if (count($reviews) > 0)
-    <ul class="list-unstyled">
-        @foreach($games as $game)
-            <li class="media mb-3">
-                <table border="1" align="left">
-                    <tr class="w-20">
-                        {{ $game->name }}
-                    </tr>
+<!DOCTYPE html>
+<html lang="ja">
+    <header>
+        <meta charset="utf-8">
+        <title>Game Reviews</title>
+    </header>
+    <body>
+        <h1>マイレビュー一覧</h1>
+        <div class="row">
+            <div class="col-sm-12">
+                <table class="table col-sm-12">
+                @foreach($reviews as $review)
+                <tr class="table-bordered">
+                    <td>{{ $review->game->name}}</td>
+                    <td>{{ $review->user->name }}</td>
+                    <td>{{ $review->score }}</td>
+                    <td>{{ $review->content }}</td>
+                    <td>
+                        @if (Auth::id() == $review->user_id)
+                        {{-- 投稿削除ボタンのフォーム --}}
+                        {!! Form::open(['route' => ['reviews.destroy', $review->id], 'method' => 'delete']) !!}
+                            {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-sm']) !!}
+                        {!! Form::close() !!}
+                        @endif
+                    </td>
+                </tr>
+                @endforeach
+                
                 </table>
-                <table border="1" align="left">
-                    <tr class="w-20">
-                        {{ $game->user }}
-                    </tr>
-                </table>
-                <table border="1" align="left">
-                    <tr class="w-20">
-                        {{ $game->score }}
-                    </tr>
-                </table>
-                <table border="1" align="left">
-                    <tr class="w-40">
-                        {{ $game->content }}
-                    </tr>
-                </table>
-            </li>
-        @endforeach
-    </ul>
-    {{-- ページネーションのリンク --}}
-    {{ $reviews->links() }}
-@endif
+            </div>
+        </div>
+    </body>
+</html>
+{{-- ページネーションのリンク --}}
+{{ $reviews->links() }}
 @endsection

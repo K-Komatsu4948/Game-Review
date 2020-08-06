@@ -20,18 +20,7 @@ class RankingusController extends Controller
 {
     public function weekly()
     {
-        
-        $data = [];
-        if (\Auth::check()) {
-            
-            $user = \Auth::user();
-            
-            $weeklyrankingus = WeeklyRankingu::take(5)->latest()->get();
-            
-            $data = [ 'weekly' => $weeklyrankingus];
-        }
-        
-        
-         return view('games.rankingu', $data);
+        //
     }
+    
 }

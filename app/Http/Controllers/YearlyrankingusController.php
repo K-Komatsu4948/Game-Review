@@ -4,7 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\User;
+
 use App\Game;
+
+use App\Review;
  
 use App\WeeklyRankingu;
 
@@ -16,12 +20,28 @@ class YearlyrankingusController extends Controller
 {
     public function yearly()
     {
+        
+        $list = \DB::table('reviews')
+        ->selectRaw('game_id, SUM(score) AS sum')
+        ->groupBy('game_id')
+        ->where('created_at', '>=', '2020-08-02 00:00:00')
+        ->where('created_at', '<', '2021-08-09 00:00:00')
+        ->orderByRaw('SUM(score)')
+        ->take(10)
+        ->get();
+            
          $data = [];
         if (\Auth::check()) {
             
-            $yearlyrankingus = YearlyRankingu::take(5)->latest()->get();
+            $user = User::orderBy('id', 'desc')->paginate(10);
             
-            $data = [ 'yearly' => $yearlyrankingus];
+            $rankingus = Review::orderBy('id', 'desc')->paginate(10);
+            
+            
+            $data = [
+                'user' => $user,
+                'yearly' => $rankingus,
+            ];
         }
         return view('games.yearly_rankingu', $data);
     }

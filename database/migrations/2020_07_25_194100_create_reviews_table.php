@@ -25,7 +25,7 @@ class CreateReviewsTable extends Migration
            
             $table->foreign('game_id')->references('id')->on('games')->onDelete('cascade');
             
-            $table->unique(['user_id', 'game_id']);
+            $table->unique(['user_id', 'game_id'])->all();
         });
     }
 
