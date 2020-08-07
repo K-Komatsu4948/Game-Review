@@ -59,11 +59,11 @@ class ReviewsController extends Controller
         $review->game_id = $request->game_id;
         $review->save();
 
-        return back();
+        return redirect('myreviews/{user}');;
     }
     public function destroy($id)
     {
-        $review = \App\User::findOrFail($id);
+        $review = \App\Review::findOrFail($id);
         if (\Auth::id() === $review->user_id) {
             $review->delete();
         }

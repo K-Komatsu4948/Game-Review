@@ -8,7 +8,7 @@
     <div>
         {{ Form::label('ゲーム名') }}
         {{ Form::hidden('game_id', $game->id,  ['id' => 'game_id']) }}
-        {{ Form::text('game',  $game->name) }}
+        <p>{{ $game->name }}</p>
     </div>
     <div>
         <label>レビュー</label></label><br>

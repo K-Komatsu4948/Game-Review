@@ -18,14 +18,17 @@
                         <th class="text-center nav-item"><a href="{{ route('yearly.get') }}" class="nav-link">年間</a></th>
                         
                 </tr>
-                @foreach($weekly as $rankingu)
+                @forelse($weekly as $rankingu)
                 <tr class="table-bordered">
                     <td>{{ $rankingu->game->name }}</td>
                     <td>{{ $rankingu->score }}</td>
                     <td>{{ $rankingu->content }}</td>
                 </tr>
-                @endforeach
+                @empty
+                    <p>まだ何も表示されていません。</p>
+                @endforelse
                 </table>
+                
             </div>
         </div>
     </body>
