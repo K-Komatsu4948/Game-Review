@@ -7,6 +7,7 @@
     {{ csrf_field() }}
     <div>
         {{ Form::label('ゲーム名') }}
+        {{ Form::hidden('game_id', $game->id,  ['id' => 'game_id']) }}
         {{ Form::text('game',  $game->name) }}
     </div>
     <div>

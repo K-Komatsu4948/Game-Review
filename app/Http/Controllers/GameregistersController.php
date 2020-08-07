@@ -37,6 +37,7 @@ class GameregistersController extends Controller
     public function store(Request $request)
     {   
         $request->validate([
+            'name' => 'required',
             'content' => 'required|max:255',
         ]);
         
