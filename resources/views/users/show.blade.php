@@ -18,9 +18,6 @@
                     <td>{{ $review->user->name }}</td>
                     <td>{{ $review->score }}</td>
                     <td>{{ $review->content }}</td>
-                    @foreach($games as $game)
-                    <td>{!! link_to_route('reviews.create', '投稿',  ['game' => $game->id]) !!}</td>
-                    @endforeach
                 </tr>
                 @endforeach
                 </table>

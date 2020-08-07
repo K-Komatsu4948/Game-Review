@@ -12,6 +12,12 @@
         <div class="row">
             <div class="col-sm-12">
                 <table class="table col-sm-12">
+                <tr class="nav-item col-sm-12">
+                    <th class="text-center">ゲーム名</th>
+                    <th class="text-center">ユーザ名</th>
+                    <th class="text-center">評価</th>
+                    <th class="text-center">レビュー</th>
+                </tr>
                 @foreach($reviews as $review)
                 <tr class="table-bordered">
                     <td>{{ $review->game->name}}</td>
