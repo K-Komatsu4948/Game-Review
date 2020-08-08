@@ -10,8 +10,9 @@ class GamesearchsController extends Controller
 {
     public function index(Request $request )
     {
+        $user = \Auth::user();
         
-      $query = Game::query();
+        $query = Game::query();
       
       
         $search1 = $request->input('name');
@@ -23,7 +24,7 @@ class GamesearchsController extends Controller
         $data = $query->paginate(10);
         
         return view('games.search', [
-            'data' => $data
+            'data' => $data,
         ]);
     }
 

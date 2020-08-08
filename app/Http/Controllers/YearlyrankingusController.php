@@ -22,11 +22,11 @@ class YearlyrankingusController extends Controller
     {
         
         $list = \DB::table('reviews')
-        ->selectRaw('game_id, SUM(score) AS sum')
+        ->selectRaw('game_id, AVG(score) AS avg')
         ->groupBy('game_id')
         ->where('created_at', '>=', '2020-08-02 00:00:00')
         ->where('created_at', '<', '2021-08-09 00:00:00')
-        ->orderByRaw('SUM(score)')
+        ->orderByRaw('AVG(score)')
         ->take(10)
         ->get();
             

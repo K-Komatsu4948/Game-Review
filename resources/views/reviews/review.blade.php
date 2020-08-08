@@ -18,7 +18,7 @@
                     <th class="text-center">評価</th>
                     <th class="text-center">レビュー</th>
                 </tr>
-                @foreach($reviews as $review)
+                @forelse($reviews as $review)
                 <tr class="table-bordered">
                     <td>{{ $review->game->name}}</td>
                     <td>{{ $review->user->name }}</td>
@@ -33,7 +33,9 @@
                         @endif
                     </td>
                 </tr>
-                @endforeach
+                @empty
+                    <p>まだ何も表示されていません。</p>
+                @endforelse
                 
                 </table>
             </div>

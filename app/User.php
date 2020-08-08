@@ -61,6 +61,10 @@ class User extends Authenticatable
         return REview::whereIn('user_id', $userIds);
     }
     
+    public function hasReview($game_id) {
+        return $this->reviews()->where('game_id', $game_id)->exists();
+    }
+    
     public function game_register() 
     {
        

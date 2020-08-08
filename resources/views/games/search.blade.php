@@ -15,7 +15,12 @@
                 @foreach($data as $game)
                 <tr class="table-bordered">
                     <td>{{ $game->name }}</td>
+                    <td>{{ $game->content }}</td>
+                    @if (Auth::user()->hasReview($game->id))
+                    <td>{{ Form::hidden('game_id', $game->id,  ['id' => 'game_id']) }}</td>
+                    @else
                     <td>{!! link_to_route('reviews.create', '投稿',  ['game' => $game->id]) !!}</td>
+                    @endif
                 </tr>
                 @endforeach
             </table>

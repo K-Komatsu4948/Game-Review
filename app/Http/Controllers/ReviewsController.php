@@ -35,6 +35,7 @@ class ReviewsController extends Controller
     
     public function create($id)
     {
+        
         $review = new Review;
         
         $game = Game::findOrFail($id);
