@@ -18,6 +18,11 @@
                         <th class="text-center nav-item"><a href="{{ route('yearly.get') }}" class="nav-link">年間</a></th>
                         
                 </tr>
+                <tr class="nav-item col-sm-12">
+                    <th class="text-center">ゲーム名</th>
+                    <th class="text-center">評価</th>
+                    <th class="text-center">レビュー</th>
+                　　</tr>
                 @forelse($weekly as $rankingu)
                 <tr class="table-bordered">
                     <td>{{ $rankingu->game->name }}</td>

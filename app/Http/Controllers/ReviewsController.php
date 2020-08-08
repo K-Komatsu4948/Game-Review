@@ -35,6 +35,11 @@ class ReviewsController extends Controller
     
     public function create($id)
     {
+        if(\Auth::user()->hasReview($id)) {
+            return redirect('/');
+            
+        }else {
+            $user = \Auth::user();
         
         $review = new Review;
         
@@ -43,15 +48,20 @@ class ReviewsController extends Controller
         return view('reviews.score', [
             'review' => $review,
             'game' => $game,
-        ]);
+            ]);
+        }
     }
     
     public function store(Request $request)
     {   
         //dd($reviews);
+         if(\Auth::user()->hasReview($request->game_id)) {
+            return redirect('/');
+            
+        }else {
         $request->validate([
-            'score' => 'required|max:255',
-            'content' => 'required|max:255',
+        'score' => 'required|max:255',
+        'content' => 'required|max:255',
         ]);
         $review = new Review;
         $review->user_id = \Auth::id();
@@ -61,6 +71,7 @@ class ReviewsController extends Controller
         $review->save();
 
         return redirect('myreviews/{user}');;
+        }
     }
     public function destroy($id)
     {
