@@ -17,7 +17,7 @@ class CreateGamesTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
             $table->string('name');
-            $table->string('content');
+            $table->string('register_content');
             $table->timestamps();
             
             $table->foreign('user_id')->references('id')->on('users');

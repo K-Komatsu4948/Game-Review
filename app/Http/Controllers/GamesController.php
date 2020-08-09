@@ -21,24 +21,20 @@ class GamesController extends Controller
 {
     public function index()
     {
-        $list = \DB::table('reviews')
-        ->selectRaw('game_id, AVG(score) AS avg')
-        ->groupBy('game_id')
-        ->where('created_at', '>=', '2020-08-02 00:00:00')
-        ->where('created_at', '<', '2020-08-09 00:00:00')
-        ->orderByRaw('AVG(score)')
-        ->take(10)
-        ->get();
+        $games = Game::all();
+
+        
         $data = [];
         if (\Auth::check()) { 
             $user = User::orderBy('id', 'desc')->paginate(10);
             
-            $rankingus = Review::orderBy('id', 'desc')->paginate(10);
+            $games = Game::paginate(10);
             
             
             $data = [
                 'user' => $user,
-                'weekly' => $rankingus,
+                'games' => $games,
+                
             ];
         }
         return view('welcome', $data);
@@ -49,12 +45,12 @@ class GamesController extends Controller
         
         $request->validate([
             'name' => 'required|max:255',
-            'content' => 'required|max:255',
+            'register_content' => 'required|max:255',
         ]);
         
         
         $request->user()->games()->create([
-            'content' => $request->content,
+            'register_content' => $request->register_content,
             'name' => $request->name,
         ]);
         

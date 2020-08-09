@@ -20,27 +20,21 @@ class MonthlyrankingusController extends Controller
 {
     public function monthly()
     {
-        $list = \DB::table('reviews')
-        ->selectRaw('game_id, AVG(score) AS avg')
-        ->groupBy('game_id')
-        ->where('created_at', '>=', '2020-08-02 00:00:00')
-        ->where('created_at', '<', '2020-09-02 00:00:00')
-        ->orderByRaw('AVG(score)')
-        ->take(10)
-        ->get();
+        $games = Game::all();
         
         $data = [];
         if (\Auth::check()) { 
             $user = User::orderBy('id', 'desc')->paginate(10);
             
-            $rankingus = Review::orderBy('id', 'desc')->paginate(10);
+            $games = Game::paginate(10);
             
             
             $data = [
                 'user' => $user,
-                'monthly' => $rankingus,
+                'games' => $games,
+                
             ];
         }
-         return view('games.monthly_rankingu', $data);
+        return view('games.monthly_rankingu', $data);
     }
 }

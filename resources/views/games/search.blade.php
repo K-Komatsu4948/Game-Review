@@ -15,7 +15,7 @@
                 @foreach($data as $game)
                 <tr class="table-bordered">
                     <td>{{ $game->name }}</td>
-                    <td>{{ $game->content }}</td>
+                    <td>{{ $game->register_content }}</td>
                     @if (Auth::user()->hasReview($game->id))
                     <td>{{ Form::hidden('game_id', $game->id,  ['id' => 'game_id']) }}</td>
                     @else

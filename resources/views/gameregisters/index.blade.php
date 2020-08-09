@@ -13,7 +13,7 @@
     </div>
     <div>
         <label>内容</label><br>
-        <textarea name="content" cols="136" rows="10"></textarea>
+        <textarea name="register_content" cols="136" rows="10"></textarea>
     </div>
     <div>
         {!! Form::open(['route' => ['search.get'], 'method' => 'get']) !!}

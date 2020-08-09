@@ -38,13 +38,13 @@ class GameregistersController extends Controller
     {   
         $request->validate([
             'name' => 'required',
-            'content' => 'required|max:255',
+            'register_content' => 'required|max:255',
         ]);
         
         $game = new Game;
         $game->user_id = $request->user()->id;
         $game->name = $request->name;
-        $game->content = $request->content;
+        $game->register_content = $request->register_content;
         $game->save();
         
         

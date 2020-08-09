@@ -24,14 +24,18 @@
                     <th class="text-center">評価</th>
                     <th class="text-center">レビュー</th>
                 　　</tr>
-                @forelse($monthly as $rankingu)
+                @forelse($games as $game)
                 <tr class="table-bordered">
-                    <td>{{ $rankingu->game->name }}</td>
-                    <td>{{ $rankingu->score }}</td>
-                    <td>{{ $rankingu->content }}</td>
+                <td>{{  $game->name }}</td>
+                <td>{{ $game->avgScore() }}</td>
+                <td>
+                @if ($game->latest_reviews())
+                {{ $game->latest_reviews()->content }}
+                @endif
+                </td>
                 </tr>
                 @empty
-                    <p>まだ何も表示されていません。</p>
+                <p>まだ何も表示されていません。</p>
                 @endforelse
                 </table>
                 </table>

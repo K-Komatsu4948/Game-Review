@@ -20,27 +20,21 @@ class YearlyrankingusController extends Controller
 {
     public function yearly()
     {
+        $games = Game::all();
         
-        $list = \DB::table('reviews')
-        ->selectRaw('game_id, AVG(score) AS avg')
-        ->groupBy('game_id')
-        ->where('created_at', '>=', '2020-08-02 00:00:00')
-        ->where('created_at', '<', '2021-08-09 00:00:00')
-        ->orderByRaw('AVG(score)')
-        ->take(10)
-        ->get();
-            
-         $data = [];
-        if (\Auth::check()) {
-            
+        $reviews = Review::all();
+        
+        $data = [];
+        if (\Auth::check()) { 
             $user = User::orderBy('id', 'desc')->paginate(10);
             
-            $rankingus = Review::orderBy('id', 'desc')->paginate(10);
+            $games = Game::paginate(10);
             
             
             $data = [
                 'user' => $user,
-                'yearly' => $rankingus,
+                'games' => $games,
+                
             ];
         }
         return view('games.yearly_rankingu', $data);
