@@ -10,15 +10,20 @@
     <body>
         <h1>ランキング</h1>
         <div class="row">
-            <div class="col-sm-10">
+            <div class="col-sm-12">
+                <ul class="nav nav-tabs">
+                    <li class="nav-item col-sm-4">
+                        <a href="{{ route('rankingu.get') }}" class="nav-link">週間</a>
+                    </li>
+                    <li class="nav-item col-sm-4">
+                        <a href="{{ route('monthly.get') }}" class="nav-link">月間</a>            
+                    </li>
+                    <li class="nav-item col-sm-4">
+                        <a href="{{ route('yearly.get') }}" class="nav-link active">年間</a>
+                    </li>
+                </ul>
                 
                 <table class="table">
-                <tr class="nav-item">
-                        <th class="text-center nav-item"><a href="{{ route('rankingu.get') }}" class="nav-link">週間</a></th>
-                        <th class="text-center nav-item"><a href="{{ route('monthly.get') }}" class="nav-link">月間</a></th>
-                        <th class="text-center nav-item"><a href="{{ route('yearly.get') }}" class="nav-link">年間</a></th>
-                        
-                </tr>
                 <tr class="nav-item col-sm-12">
                     <th class="text-center">ゲーム名</th>
                     <th class="text-center">評価</th>
